@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-</head>
-<body>
-    <div class="container my-3">
+<html layout:decorate="~{layout}">
+    <div layout:fragment="content" class="container my-3">
         <!-- 질문 -->
         <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
         <div class="card my-3">
@@ -20,11 +12,11 @@
                 </div>
             </div>
         </div>
-
-
+    
+    
         <!-- 답변 개수 표시 -->
         <h5 th:text="|${#lists.size(question.answerList)}개의 답변이 잇습니다.|"></h5>
-
+    
         <!-- 답변 반복 시작 -->
         <div class="card my-3" th:each="answer : ${question.answerList}">
             <div class="card-body">
@@ -37,13 +29,12 @@
             </div>
         </div>
         <!-- 답변 반복 끝 -->
-
-
+    
+    
         <!-- 답변 작성 -->
         <form th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">
             <textarea name="content" id="content" rows="10" class="form-control"></textarea>
             <input type="submit" value="답변 등록" class="btn btn-primary my-2">
         </form>
     </div>
-</body>
 </html>
